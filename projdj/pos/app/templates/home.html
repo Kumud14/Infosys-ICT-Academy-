@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>POS Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 30px;
+            color: #333;
+        }
+
+        h1 {
+            color: #222;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        a {
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 0 5px;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+
+        a:hover {
+            background-color: #388e3c;
+        }
+
+        h2 {
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 5px;
+            margin-top: 40px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        li {
+            background-color: white;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>POS Dashboard</h1>
+
+        <div>
+            <a href="{% url 'add_product' %}">Add Product</a>
+            <a href="{% url 'add_customer' %}">Add Customer</a>
+            <a href="{% url 'add_order' %}">Add Order</a>
+        </div>
+
+        <h2>Products</h2>
+        <ul>
+            {% for p in products %}
+                <li>{{ p.name }} - ₹{{ p.price }} - Qty: {{ p.quantity }} - Disc: {{ p.discount }}%</li>
+            {% empty %}
+                <li>No products available</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Customers</h2>
+        <ul>
+            {% for c in customers %}
+                <li>{{ c.name }} - {{ c.mobile }} - {{ c.email }}</li>
+            {% empty %}
+                <li>No customers available</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Orders</h2>
+        <ul>
+            {% for o in orders %}
+                <li>{{ o.customer.name }} ordered {{ o.product.name }} on {{ o.order_date }}</li>
+            {% empty %}
+                <li>No orders yet</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
