@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background-color: #f0f8ff;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-top: 50px;
+        }
+        a {
+            display: inline-block;
+            margin: 20px;
+            text-decoration: none;
+            color: white;
+            background-color: #3498db;
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+        a:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Home Page</h1>
+    <a href="/about/">About</a>
+    <a href="/login/">Login</a>
+
+    <form action="" method="post">
+    {% csrf_token %}
+    <input type="text" name="name" value="{{ data.name }}" placeholder="Enter name">
+<input type="text" name="number" value="{{ data.number }}" placeholder="Enter number">
+
+
+    <button type="submit">Submit</button>
+</form>
+
+
+    
+</div>
+</body>
+</html>
