@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Home</title>
+    <style>
+        body {font-family: Arial; background:#f4f4f4; padding:20px;}
+        h1 {text-align:center;}
+        .nav {text-align:right; margin-bottom:20px;}
+        .nav a {margin-left:15px; text-decoration:none; color:#007bff;}
+        .nav a:hover {text-decoration:underline;}
+        .product {background:white; padding:15px; margin:10px auto; width:400px; border-radius:8px; box-shadow:0 0 5px rgba(0,0,0,0.1); text-align:center;}
+        .buy-btn {background:#28a745; color:white; padding:6px 15px; text-decoration:none; border-radius:5px;}
+        .buy-btn:hover {background:#218838;}
+        .out {color:gray; font-weight:bold;}
+    </style>
+</head>
+<body>
+
+    <div class="nav">
+        <a href="{% url 'orders' %}">My Orders</a>
+        <a href="{% url 'logout' %}">Logout</a>
+        <a href="{% url 'chat' 2 %}">Chat with User 2</a>
+
+    </div>
+
+    <h1>Available Products</h1>
+
+    {% for product in products %}
+    <div class="product">
+        <h3>{{ product.name }}</h3>
+        <p>₹{{ product.price }}</p>
+        <p>Stock: {{ product.stock }}</p>
+        <p>{{ product.description }}</p>
+        {% if product.stock > 0 %}
+        <a class="buy-btn" href="{% url 'order' product.id %}">Buy Now</a>
+        {% else %}
+        <p class="out">Out of Stock</p>
+        {% endif %}
+    </div>
+    {% empty %}
+    <p style="text-align:center;">No products available</p>
+    {% endfor %}
+
+</body>
+</html>

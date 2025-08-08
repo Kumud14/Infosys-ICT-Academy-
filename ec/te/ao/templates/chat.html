@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat with {{ other_user.username }}</title>
+    <style>
+        body { font-family: Arial; padding: 20px; background: #f9f9f9; }
+        .message { margin-bottom: 10px; }
+        .sender { font-weight: bold; }
+        .chat-box { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 0 5px rgba(0,0,0,0.1); max-width: 600px; margin: auto; }
+        .form { margin-top: 20px; }
+        textarea { width: 100%; height: 80px; padding: 10px; }
+        button { padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="chat-box">
+        <h2>Chat with {{ other_user.username }}</h2>
+        <div>
+            {% for msg in messages %}
+                <div class="message">
+                    <span class="sender">{{ msg.sender.username }}:</span>
+                    <span>{{ msg.content }}</span>
+                    <small>({{ msg.timestamp|date:"d M H:i" }})</small>
+                </div>
+            {% empty %}
+                <p>No messages yet.</p>
+            {% endfor %}
+        </div>
+
+        <form method="post" class="form">
+            {% csrf_token %}
+            <textarea name="content" required placeholder="Type your message..."></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+</body>
+</html>
